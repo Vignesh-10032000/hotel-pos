@@ -1,15 +1,103 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   * {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Prevent browser pull-to-refresh & pinch zoom on POS touch screen */
   html,
   body {
     touch-action: pan-x pan-y;
     user-select: none;
     -webkit-user-select: none;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom smooth thin scrollbar for touchscreen & desktop */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* Robust Windows Browser Thermal Receipt & Report Printing */
+@media print {
+  @page {
+    margin: 4mm;
+    size: auto;
+  }
+
+  /* Hide navigation, sidebar, headers, and UI chrome */
+  aside,
+  header,
+  nav,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  #root,
+  main {
+    overflow: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Thermal Receipt Printing formatting */
+  #thermal-receipt {
+    display: block !important;
+    position: relative !important;
+    width: 74mm !important;
+    max-width: 74mm !important;
+    margin: 0 auto !important;
+    padding: 4mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 11px !important;
+    page-break-after: always;
+  }
+
+  #thermal-receipt * {
+    color: #000000 !important;
+    background: transparent !important;
+  }
+
+  /* Printable Report full width */
+  .printable-report {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
   }
 }
