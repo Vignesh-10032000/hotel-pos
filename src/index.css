@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent browser pull-to-refresh & pinch zoom on POS touch screen */
+  html,
+  body {
+    touch-action: pan-x pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
